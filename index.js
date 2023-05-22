@@ -28,7 +28,9 @@ app.use("/client", clientRoutes);
 app.use("/general", generalRoutes);
 app.use("/management", managementRoutes);
 app.use("/sales", salesRoutes);
-
+app.use("/",(req,res)=>{
+  res.end("welcome")
+})
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 9000;
 mongoose
