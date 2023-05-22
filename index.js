@@ -10,7 +10,14 @@ import generalRoutes from "./routes/general.js";
 import managementRoutes from "./routes/management.js";
 import salesRoutes from "./routes/sales.js";
 
-
+// cors middle ware
+// CORS middleware
+const allowCrossDomain = (req, res, next) => {
+  res.header(`Access-Control-Allow-Origin`, `*`);
+  res.header(`Access-Control-Allow-Methods`, `GET,PUT,POST,DELETE`);
+  res.header(`Access-Control-Allow-Headers`, `Content-Type`);
+  next();
+};
 
 /* CONFIGURATION */
 dotenv.config();
@@ -21,7 +28,8 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors({origin:"*",}));
+app.use(cors({origin:"*",methods:["GET","POST"]}));
+app.use(allowCrossDomain)
 
 /* ROUTES */
 app.use("/client", clientRoutes);
